@@ -4,12 +4,12 @@ import * as om from "./thing.js";
 //import * as ko from "/lib/knockout-3.4.2.js";
 
 export class Network {
-    constructor(){
+    constructor() {
         this.self = this;
         self.APIServer = "";
-    }   
+    }
 
-    fetch (path) {
+    fetch(path) {
         var path = path || "";
         return new Promise(function (resolve, reject) {
             var xhr = new XMLHttpRequest();
@@ -35,51 +35,52 @@ export class Network {
 
     }
 };
-export class Book{
-    constructor(rdy){
+export class Book {
+    constructor(rdy) {
         this.self = this;
         this.osn = "ListTbl";
         this.dbn = "onMarkDB";
         var onready = rdy;
-        var request =  indexedDB.open(this.dbn,1);
-        request.onupgradeneeded = function(e) {
+        var request = indexedDB.open(this.dbn, 1);
+        request.onupgradeneeded = function (e) {
             console.log('In Upgrade');
             var db = e.target.result;
-
-            let store = db.createObjectStore("ListTbl", {keyPath:"id"});
-            store.createIndex("by_title","title");
+            let store = db.createObjectStore("ListTbl", {
+                keyPath: "id"
+            });
+            store.createIndex("by_title", "title");
             store.put(ko.toJS(new om.ThingList("Tomorrow")));
         }
-        request.onerror = function(evt){
+        request.onerror = function (evt) {
             console.log(evt);
         }
         var ank = this;
-        request.onsuccess = function(e){
+        request.onsuccess = function (e) {
             ank.db = e.target.result;
             console.log(ank);
-            if(onready){
+            if (onready) {
                 onready(ank);
-            }else{
+            } else {
                 console.log("no onready")
             }
         }
     }
-    
-    SavedLists(anx){
-        console.log(this.db,"---",this.self);
-        
-        if(this.db){
+
+    SavedLists(anx) {
+        console.log(this.db, "---", this.self);
+
+        if (this.db) {
             console.log("in it");
-            var tx = this.db.transaction(['ListTbl'],'readwrite');
+            var tx = this.db.transaction(['ListTbl'], 'readwrite');
             var tbl = tx.objectStore('ListTbl');
             var cur = tbl.openCursor(IDBKeyRange.lowerBound(0));
             var lists = [];
-            tx.oncomplete = function(e){
+            tx.oncomplete = function (e) {
                 anx(lists);
             }
-            cur.onsuccess = function(e){
+            cur.onsuccess = function (e) {
                 var result = e.target.result;
-                if(!!result == false){
+                if (!!result == false) {
                     console.log('Empty');
                     return;
                 }
@@ -88,18 +89,29 @@ export class Book{
             }
         }
     }
-    SaveAList(lst,then){
-        if(this.db && lst){
+    SaveAList(lst, then) {
+        if (this.db && lst) {
             console.log("saving");
-            var tx = this.db.transaction(['ListTbl'],'readwrite');
+            var tx = this.db.transaction(['ListTbl'], 'readwrite');
             var tbl = tx.objectStore('ListTbl');
             tbl.put(ko.toJS(lst));
-            tx.oncomplete =function(){
-                if(then)
+            tx.oncomplete = function () {
+                if (then)
                     then();
             }
         }
     }
+    RemoveAList(lst, then) {
+        if (this.db && then) {
+            console.log("erasing");
+            var tx = this.db.transaction(['ListTbl'], 'readwrite');
+            var tbl = tx.objectStore('ListTbl');
+            tbl.delete(ko.toJS(lst).id);
+            tx.oncomplete = function () {
+                if (then) {
+                    then();
+                }
+            }
+        }
+    }
 }
-
-
