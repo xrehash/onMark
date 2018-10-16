@@ -82,7 +82,7 @@
         <p class="thingStatus minimal">Status <span class="field" data-bind="text:Status"></span></p>
         <div class="list" data-bind="template:{name:'thingTemplate',foreach:Items}">
         </div>
-        <div><i class="fa fa-plus-square fa-lg btn" data-bind="click:promptItem.bind($data,$root)"></i></div>
+        <div><i class="fa fa-plus-square fa-lg btn" data-bind="click:promptItem.bind($data,$parent,$root)"></i></div>
       </div>
     </div>
   </main>
