@@ -16,6 +16,7 @@
 body {
     background-color: rgb(224, 240, 236);
     font-size: 14pt;
+    line-height: 20pt;
     font-family: 'Open Sans', Arial, Helvetica, sans-serif;
 }
 
@@ -33,7 +34,16 @@ h4,
 h5,
 h6 {
     margin-top: 0;
+    margin-bottom: 0;
     font-family: 'Ostrich Sans', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+h3,
+h4,
+h5,
+h6 {
+    font-weight: normal;
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
 }
 
 p {
@@ -43,9 +53,10 @@ p {
 .main .tbl {
     margin: 10px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     grid-column-gap: 25px;
     grid-row-gap: 18px;
+    grid-template-rows: min-content;
 }
 
 .tbl>* {
@@ -74,6 +85,7 @@ p {
     text-transform: lowercase;
     font-family: 'Open Sans', sans-serif;
     color: rgb(65, 97, 128);
+    font-size:75%;
 }
 
 footer {
@@ -82,19 +94,40 @@ footer {
     margin: 5px 0px;
 }
 
-button.btn {
-    cursor: hand;
-    color: rgb(245, 150, 42);
-    background-color: rgb(24, 14, 13);
-    /* font-family: sans-serif; */
+#_newList {
 
-    /* text-shadow: 1px 1px 2px rgb(180, 228, 46); */
-    border-color: rgb(245, 150, 42);
-    border-radius: 5px;
+    height: 1cm;
+    width: 1cm;
+    font-size: 5mm;
+    position: absolute;
+    top: 2mm;
+    right: 5mm;
+    color: white;
+    background: linear-gradient(30deg, gray -2%, rgb(24, 165, 201) 120%);
 }
 
-button.btn:hover {
-    border-color: aqua;
+.btn {
+    display: inline-block;
+    border-radius: 10%;
+    border-color: silver;
+    border-width: .5mm;
+    margin: 1mm;
+    border-style: solid;
+}
+
+.heading .btn {
+    height: 9mm;
+    width: 9mm;
+    color: rgb(3, 15, 7);
+    background: linear-gradient(30deg, rgb(241, 243, 243) -2%, rgb(24, 165, 201) 120%);
+}
+
+.action .btn {
+    border-width: 0;
+}
+
+.btn>* {
+    vertical-align: middle;
 }
 
 .thing {
@@ -117,17 +150,28 @@ button.btn:hover {
     /* font-weight: 300; */
 }
 
-.thingLayout {}
+.thingLayout .innerListTitle {
+    text-transform: uppercase;
+    font-size:65%;
+    border-top: 1px solid silver;
+    display: grid;
+    grid-template-columns: auto 40px;
+}
 
 .minimal {
-    font-size: 60%;
+    font-size: 80%;
     line-height: 150%;
     padding: 0;
     margin: 0;
 }
 
+.tblFields {
+    table-layout: auto;
+    border-collapse: collapse;
+}
+
 .field {
-    font-weight: bold;
+    font-weight: normal;
     color: rgb(180, 90, 0);
 
     /* border: 1px dotted rgb(205,202,240);
@@ -138,18 +182,23 @@ button.btn:hover {
 .thing .action {
     margin: 0;
     display: grid;
-    grid-template-columns: auto 20px repeat(5, 20px);
+    grid-template-columns: auto 20px repeat(5, 30px);
     grid-column-gap: 4px;
     align-items: center;
     background-color: rgb(65, 97, 128);
-    font-size: 13pt;
-    color: rgb(117, 129, 151);
+    /* font-size: 13pt; */
+    color: silver;
+}
+
+.thing .action i.fa:hover, em.fa:hover {
+    border: 1px solid whitesmoke;
+    padding: 2px;
 }
 
 .heading {
     margin: 0;
     display: grid;
-    grid-template-columns: auto 80px;
+    grid-template-columns: auto repeat(3, 10mm);
     grid-column-gap: 4px;
     align-items: center;
     border-bottom: 2px double dodgerblue;
@@ -164,9 +213,10 @@ button.btn:hover {
     font-size: 12pt;
 }*/
 
-i.fa {
+i.fa, em.fa {
     text-align: center;
     cursor: pointer;
+    padding: 2px;
 }
 
 .removeListBtn {
@@ -252,5 +302,13 @@ i.undisplayed {
 .description {
     padding: 2px;
     font-size: 100%;
-    border-radius: 6px;
+    /* border-radius: 6px;
+    border: inset silver 0.5mm; */
+    min-height: 1cm;
+    display: block;
+}
+
+.field {
+    min-width: 3cm;
+    display: inline-block;
 }

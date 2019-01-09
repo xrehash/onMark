@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>onMark Todo Helper</title>
+  <link rel="stylesheet" href="lib/skeleton/normalize.css" />
+  <link rel="stylesheet" href="lib/font-awesome-4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="art.css" />
+  <script src="lib/knockout-3.4.2.js" defer></script>
+  <script src="https://apis.google.com/js/api.js" type="text/javascript"></script>
+  <script src="script.js" type="module" defer></script>
+</head>
+<script id="thingTemplate" type="text/html">
+  <div class="thing" data-bind="css:{'marked':marked()}">
+    <div class="thingLayout">      
+      <div class="action">
+      <h4 class="title" data-bind="css:{'done':Status() == 'Done'},text:Title"></h4>
+      <i class="fa btn fa-ellipsis-v" data-bind="click:$parent.makeListClick.bind($data,$parent), css:{'undisplayed':!(undefined == $data.Items)}"></i>
+      <i class="fa btn fa-inbox" data-bind="click:$parent.moveComplete.bind($data,$parent,$root), css:{'undisplayed':(undefined == $data.Items)}"></i>
+      <i class="fa fa-trash btn" data-bind="click: $parent.trashItem.bind($data,$parent)"></i>
+      <i class="fa btn" data-bind="click:playPauseClick, css:{'fa-play':(Status() != 'Done' && Status() != 'In-Progress'), 'fa-pause':(Status() != 'Done' && Status() != 'New' && Status() != 'Paused')}"></i>
+      <i class="fa btn" data-bind="click: completeItemClick,css:{'fa-square-o':(Status() != 'Done'), 'fa-check':(Status() == 'Done')}"></i>
+      <i class="fa btn fa-suitcase" data-bind="click:$parent.moveActivate.bind($data,$parent,$root)" aria-hidden="true"></i>
+      <i class="fa btn fa-pencil" data-bind="click:$parent.editClick.bind($data,$parent,$root)" aria-hidden="true"></i>
+      </div>
+      <div data-bind="if:$data.description">
+        <!-- <hr /> -->
+        <div class="description" data-bind="text:description"></div>
+        
+        <div data-bind="if:$data.Items">
+          <div ><h5 class="innerListTitle">Child Tasks</h5><em class="fa fa-plus-square fa-lg" data-bind="click:promptItem.bind($data,$parent,$root)"></em></div>
+            <div class="list" data-bind="template:{name:'thingTemplate',foreach:Items}"></div>        
+        </div>
+        <p class="status">Status:<span class="field" data-bind="text:Status"></span></p>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script id="thingEditorTemplate" type="text/html">
+  <div class="dlgWrapper">
+    <div class="dlg" data-bind="with:tool">
+      <h5>Item Editor</h5>
+      <div class="bar">
+          <i class="fa fa-hdd-o fa-lg btn" data-bind="click:$parent.mark.completeAdd" ></i>
+        <i class="fa fa-trash fa-lg btn" data-bind="click:$parent.mark.cancelEdit"></i></div>
+        <div class="fieldBlock">
+      <label>Title <input name="title" data-bind="value:title" type="text" /></label>
+      <label>Description <textarea name="desc" data-bind="value:description"></textarea></label>
+        </div>
+      </div>
+  </div>
+</script>
+
+<body>
+  <header class="page_header">
+    <h1>onMark</h1>
+    <!-- <h5>Navigation</h5> -->
+    <div><button id="_newList" class="btn" data-bind="click:addList"><i class="fa fa-plus" data-bind=""></i></button>
+    </div>
+  </header>
+  <main class="main">
+    <div id="editorNode">
+      <div data-bind="template  :{ name : 'thingEditorTemplate', if : showEditor, data : activeEditItem }"></div>
+    </div>
+    <div class="tbl" data-bind="foreach: Lists()">
+      <div class='listItem'>
+        <div class="heading">
+          <h3 class="title" data-bind="text:Title"></h3>
+          <!-- <div class="bar"> -->
+          <button class="btn"><i class="fa fa-inbox" data-bind="click:moveComplete.bind($data,$data,$root), css:{'undisplayed':(undefined == $data.Items)}"></i></button>
+          <button class="btn"><i class="fa fa-hdd-o fa-lg" data-bind="click:$parent.saveList.bind($data,$parent)"></i></button>
+          <button class="btn"><i class="fa fa-trash-o fa-lg" data-bind="click:$parent.removeList.bind($data,$parent)"></i></button>
+          <!-- </div> -->
+        </div>
+        <table class="tblFields minimal">
+          <tr>
+            <td>Created</td>
+            <td><span class="field" data-bind="text:created().toLocaleString()"></span>
+            </td>
+            <td>Status </td>
+            <td><span class="field" data-bind="text:Status"></span>
+            </td>
+          </tr>
+        </table>
+        <div data-bind="if:$data.description">
+          <h4>Description</h4>
+          <div class="description" data-bind="text:description"></div>
+        </div>
+        <h4>Items</h4>
+        <div class="list" data-bind="template:{name:'thingTemplate',foreach:Items}">
+        </div>
+        <div><i class="fa fa-plus-square fa-lg btn" data-bind="click:promptItem.bind($data,$parent,$root)"></i></div>
+      </div>
+    </div>
+  </main>
+  <footer id="page_footer">Copyright Richard Lawson 2019&copy;.</footer>
+  </div>
+
+</body>
+
+</html>

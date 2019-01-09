@@ -1,0 +1,165 @@
+/* art.css */
+@font-face {
+    font-family: 'Open Sans';
+    src: url('lib/OpenSans-Regular.ttf');
+}
+@font-face {
+    font-family: 'Ostrich Sans';
+    src: url('lib/OstrichSans-Black.otf');
+}
+@font-face {
+    font-family: 'Palanquin';
+    src: url('lib/palanquin-thin.ttf');
+}
+@font-face {
+    font-family: 'PaulSlab';
+    font-weight: 400;
+    src: url('lib/PaulSlab-Regular-Trail.otf');
+}
+@font-face {
+    font-family: 'PaulSlab';
+    font-weight: 700;
+    src: url('lib/PaulSlab-Bold-Trail.otf');
+}
+html,body{
+    font-family: 'Open Sans',Arial, Helvetica, sans-serif;
+    font-weight:400;
+    font-size: 5mm;
+    color: rgb(20, 20, 22);
+    background-color:white;
+    margin: 0mm;
+}
+.page_header{
+    margin:0;
+    padding: 0;
+    border:0.5mm solid rgb(0,0,0);
+    border-left-style: none;
+    border-right-style: none;
+    background:linear-gradient(40deg, rgb(20, 138, 248) -2%, rgb(7, 223, 133) 120%);
+}
+.page_header h1{
+    font-family: 'PaulSlab',Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 10mm;
+    margin-left:5mm;
+}
+footer{
+    margin:0;
+    padding: 2mm;
+    border:0.25mm solid rgb(0,0,0);
+    border-left-style: none;
+    border-right-style: none;
+    background:linear-gradient(0deg, hsla(145,70%,20%,0.8) -2%, hsla(145,70%,80%,0.9) 150%);
+
+    font-size:4mm;
+}
+#_newList{
+    height: 1.8cm;
+    width: 1.8cm;
+    font-size: 9mm;
+    position: absolute;
+    top: 10mm;
+    right: 5mm;
+    color: white;
+    border-color: #fff;
+    border-width: 0.5mm;
+    border-style:solid;
+    border-radius: 1.5mm;
+    background: linear-gradient(30deg, rgb(241, 42, 115) 2%, rgb(250, 249, 176) 99%);
+}
+#_newList:hover{
+    text-shadow: 2px 2px 3px hsla(350, 100%, 58%, 0.8);
+}
+
+.tbl{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15cm, 1fr));
+    grid-column-gap: 8mm;
+    grid-template-rows: min-content;
+}
+.listItem{
+    border: 1px solid rgb(7, 99, 136);
+    border-radius: 3mm;
+    padding: 1mm;
+    width: auto;
+    margin: 8mm 1.5mm 4mm 1.5mm;
+    background-color: rgb(249, 250, 248);
+    box-shadow: 2mm 2mm 1mm rgba(80, 80, 66, 0.3);
+    min-width: 12cm;
+    max-width: 18cm;
+    
+}
+.listItem .heading{
+    margin: 0;
+    padding: 1mm;
+    height: 15mm;
+    border-bottom: 2px double dodgerblue;
+    display: grid;
+    grid-template-columns: auto repeat(3,15mm);
+    justify-items: center;
+    align-items: baseline;
+}
+.listItem .heading .title{
+    justify-self: start;
+    font-family: 'Ostrich Sans', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+.listItem .heading .btn{
+    height: 10mm;
+    width: 10mm;
+    margin: 1mm;
+    margin-bottom: 0.5mm;
+    border: 0.25mm solid hsla(120,60%,30%,1);
+    color: #000;
+    border-radius:1mm;
+    align-self: center;
+    background-image: linear-gradient(215deg, hsla(220,40%,50%,0.5) 0%, hsla(160,100%,70%,0.5) 95%);
+}
+.listItem .heading .btn:hover{
+    color:#fff;
+    background-image: linear-gradient(215deg, hsla(120,40%,50%,1) 0%, hsla(120,100%,50%,1) 95%);
+}
+i.fa, em.fa {
+    text-align: center;
+    cursor: pointer;
+    padding: 2px;
+}
+.listItem .tblFields {
+    width: 100%;
+    height: 10mm;
+    font-size: 3mm;
+}
+.listItem .field{
+    color: #000;
+    padding: 1mm;
+    margin: 0.5mm;
+    display:inline-block;
+    min-width: 20mm;
+    border-width: 0.5mm;
+    /*border-color:#000;*/ 
+    border-style: inset;
+    border-radius: 2.5mm;
+}
+.thing{
+    margin-left: 5mm;
+    font-size: 5mm;
+    margin-bottom: 2mm;
+    border-radius: 2mm;
+    border:0.25mm solid silver;
+    border-top-left-radius: 0;
+}
+.thing .action{
+    display: grid;
+    border-bottom: 0.15mm solid silver;
+    grid-template-columns: auto repeat(7,8mm);   
+    background-color: hsla(60,100%,70%,0.5);
+}
+.thing .action .title{
+    min-width: 6cm;
+    margin:0;
+    padding:0;
+    font-family: 'Palanquin';
+    font-size:5mm;
+    /* color:hsla(20,80%,60%,1); */
+}
+.done{
+    text-decoration:line-through; 
+}
