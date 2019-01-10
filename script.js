@@ -8,10 +8,10 @@ import * as om from "./app/thing.js";
 
 document.onreadystatechange = function (evt) {
   if (document.readyState == 'complete') {
-    gapi.load('auth2', function () {
-      // Library loaded.
-      console.log("Google Up");
-    });
+    // gapi.load('auth2', function () {
+    //   // Library loaded.
+    //   console.log("Google Up");
+    // });
     // initialize application
     let app = new om.OnMark();
     ko.applyBindings(app);

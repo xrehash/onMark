@@ -24,7 +24,7 @@
 html,body{
     font-family: 'Open Sans',Arial, Helvetica, sans-serif;
     font-weight:400;
-    font-size: 5mm;
+    font-size: 4mm;
     color: rgb(20, 20, 22);
     background-color:white;
     margin: 0mm;
@@ -51,6 +51,10 @@ footer{
     background:linear-gradient(0deg, hsla(145,70%,20%,0.8) -2%, hsla(145,70%,80%,0.9) 150%);
 
     font-size:4mm;
+}
+p{
+    margin: 0;
+    padding: 0;
 }
 #_newList{
     height: 1.8cm;
@@ -134,9 +138,10 @@ i.fa, em.fa {
     display:inline-block;
     min-width: 20mm;
     border-width: 0.5mm;
-    /*border-color:#000;*/ 
-    border-style: inset;
-    border-radius: 2.5mm;
+    border-color:rgb(97, 94, 94); 
+    border-style: solid;
+    border-radius: 3mm;
+    background-image: linear-gradient(180deg, hsla(100,40%,60%,1) -30%, hsla(120,60%,80%,1) 75%);
 }
 .thing{
     margin-left: 5mm;
@@ -162,4 +167,13 @@ i.fa, em.fa {
 }
 .done{
     text-decoration:line-through; 
+    background-color: hsla(60,90%,30%,0.5);
+}
+.description{
+    font-size: 4mm;
+}
+.status{
+    font-size:4mm;
+    text-align: right;
+    color: hsla(60,100%,20%,0.5); 
 }
